@@ -4,28 +4,39 @@
 
 #include <iostream>
 #include <cstring>
+#include <string>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <time.h>
+#include <cstdlib>
 
 using namespace std;
+
+void makeDir(string);
+void removeDir(string);
+void getStat(string);
+int doesPathExist(string);
 
 int main(int argc, const char * argv[]) {
     
     if(argc < 2){
-        cout << "There are no arguments" << endl;
-        return -1;
+        cout << "There are not enough arguments" << endl;
+        exit(-1);
     }
     
     
     if(strcmp(argv[1], "createDir") == 0){
+
+        makeDir(argv[2]);
         
-        //createDir(argv[2]);
     }
     else if(strcmp(argv[1], "deleteDir") == 0){
 
-        //deleteDir(argv[2]);
+        removeDir(argv[2]);
     }
     else if(strcmp(argv[1], "get") == 0){
 
-        //get(argv[2]);
+        getStat(argv[2]);
     }
     else if(strcmp(argv[1], "set") == 0){
         
@@ -66,7 +77,98 @@ int main(int argc, const char * argv[]) {
         
         //createFile(argv[2]);
         
-    }
+    }else {
+	cout << "incorrect command enter: " << argv[1] << endl;
+	}
     
     return 0;
 }
+
+int doesPathExist(string path, struct stat &b){
+    
+    return stat(path.c_str(), &b);
+}
+
+//make directory
+void makeDir(string path){
+    
+    int status;
+    struct stat b;
+    
+    //check to see if path exists.
+    status = doesPathExist(path, b);
+    
+    if(status == 0){
+        cout << "Directory already exist\n";
+        exit (-1);
+    }
+    
+    //user has read,write, exec access while group and other only has read access.
+    status = mkdir(path.c_str(), S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IROTH);
+    
+    if(status == 0)
+        cout << "Directory was created \n";
+    else{
+        cout << "Error in creating directory, check if path exist.\n";
+        exit(-1);
+    }
+}
+
+//remove directory
+void removeDir(string path){
+    
+    int status;
+    struct stat b;
+    
+    //check to see if path exist.
+    status = doesPathExist(path, b);
+    
+    if(status < 0){
+        cout << "Error, path does not exist \n";
+        exit(-1);
+    }
+    
+    //remove directory
+    status = rmdir(path.c_str());
+    
+    if(status == 0)
+        cout << "Directory successfully removed \n";
+    else{
+        cout << "Error in removing Directory, check to see if Directory is empty \n";
+        exit(-1);
+    }
+}
+
+//get attribute
+void getStat(string path){
+    
+    int status;
+    struct stat b;
+    
+    status = doesPathExist(path, b);
+    
+    if(status < 0){
+        
+        cout << "Error, path does not exist \n";
+        exit(-1);
+        
+    }else{
+        
+        cout << "ID of Device:              " << b.st_dev << endl;
+        cout << "Inode number:              " << b.st_ino << endl;
+        cout << "Protection:                " << b.st_mode << endl;
+        cout << "Number of Hard Link:       " << b.st_nlink <<endl;
+        cout << "User ID:                   " << b.st_uid << endl;
+        cout << "group ID:                  " << b.st_gid << endl;
+        cout << "Total size:                " << b.st_size << endl;
+        cout << "Time of Last Access:       " << asctime(localtime(&b.st_atime));
+        cout << "Time of last Modification: " << asctime(localtime(&b.st_mtime));
+        cout << "Time of last status:       " << asctime(localtime(&b.st_ctime));
+        
+    }
+    
+}
+
+
+
+
