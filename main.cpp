@@ -40,7 +40,13 @@ int main(int argc, const char * argv[]) {
     }
     else if(strcmp(argv[1], "set") == 0){
         
-        //set(argv[2]);
+       if (argv[3] == NULL){
+       cout << "Need premission input";
+       return 0;
+       }
+        
+       set(argv[2], argv[3]);
+
 
     }
     else if(strcmp(argv[1], "move") == 0){
@@ -167,6 +173,39 @@ void getStat(string path){
         
     }
     
+}
+
+void set(string path, string argv){
+    
+    if(strcmp(argv.c_str(), "S_IRUSRt")){
+        chmod(path.c_str(), S_IRUSR);
+    }else if(strcmp(argv.c_str(), "S_IRWXU")){
+        chmod(path.c_str(), S_IRWXU);
+    }else if(strcmp(argv.c_str(), "S_IWUSR")){
+        chmod(path.c_str(), S_IWUSR);
+    }else if(strcmp(argv.c_str(), "S_IXUSR")){
+        chmod(path.c_str(), S_IXUSR);
+    }else if(strcmp(argv.c_str(), "S_IRGRP")){
+        chmod(path.c_str(), S_IRGRP);
+    }else if(strcmp(argv.c_str(), "S_IRWXG")){
+        chmod(path.c_str(), S_IRWXG);
+    }else if(strcmp(argv.c_str(), "S_IWGRP")){
+        chmod(path.c_str(), S_IWGRP);
+    }else if(strcmp(argv.c_str(), "S_IXGRP")){
+        chmod(path.c_str(), S_IXGRP);
+    }else if(strcmp(argv.c_str(), "S_IROTH")){
+        chmod(path.c_str(), S_IROTH);
+    }else if(strcmp(argv.c_str(), "S_IRWXO")){
+        chmod(path.c_str(), S_IRWXO);
+    }else if(strcmp(argv.c_str(), "S_IWOTH")){
+        chmod(path.c_str(), S_IWOTH);
+    }else if(strcmp(argv.c_str(), "S_IXOTH")){
+        chmod(path.c_str(), S_IXOTH);
+    }else{
+        cout << "Error, incorrect arguments";
+        exit(-1);
+    }
+
 }
 
 
