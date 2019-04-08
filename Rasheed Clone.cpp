@@ -35,6 +35,11 @@ int main(int argc, const char * argv[]) {
     else if(strcmp(argv[1], "move") == 0){
         
         //set(argv[2],argv[3]);
+        try {
+            std::filesystem::rename("from.txt", "to.txt");
+        } catch (std::filesystem::filesystem_error& e) {
+            std::cout << e.what() << '\n';
+        }
         
     }
     else if(strcmp(argv[1], "read") == 0){
@@ -55,18 +60,18 @@ int main(int argc, const char * argv[]) {
     else if(strcmp(argv[1], "help") == 0){
         
         //deleteDir(argv[2]);
-        printf("createDir\n");
-        printf("deleteDir\n");
-        printf("get\n");
-        printf("set\n");
-        printf("move\n");
-        printf("read\n");
-        printf("write\n");
-        printf("close\n");
-        printf("help\n");
-        printf("open\n");
-        printf("deleteFile\n");
-        printf("createFile\n");
+        cout << "createDir\n";
+        cout << "deleteDir\n";
+        cout << "get\n";
+        cout << "set\n";
+        cout << "move\n";
+        cout << "read\n";
+        cout << "write\n";
+        cout << "close\n";
+        cout << "help\n";
+        cout << "open\n";
+        cout << "deleteFile\n";
+        cout << "createFile\n";
     }
     else if(strcmp(argv[1], "open") == 0){
         
@@ -92,22 +97,34 @@ int main(int argc, const char * argv[]) {
         }
         fclose(fptr);
         
+        /*
+        int nsize = 10;
+        char *somedata;
+        ifstream myfile;
+        myfile.open("<path to file>");
+        myfile.read(somedata,nsize);
+        myfile.close();
+         */
+        
     }
     else if(strcmp(argv[1], "deleteFile") == 0){
         
         //deleteFile(argv[2]);
         int status;
-        char file[25];
+        char file_name[25];
         
-        printf("Type name of file to be deleted\n");
-        gets(file);
+        cout << "Enter name of a file you wish to delete\n";
+        gets(file_name);
         
         status = remove(file_name);
         
         if (status == 0)
-        printf("%s File deleted\n", file);
+            cout << "%s file deleted successfully.\n", file_name;
         else
-            perror("Error");
+        {
+            cout << "Unable to delete the file\n";
+            perror("Following error occurred");
+        }
         
         
         return 0;
@@ -117,8 +134,14 @@ int main(int argc, const char * argv[]) {
         
         //createFile(argv[2]);
         /*Create file*/
-        printf("Creating file..\n");
-        FILE *f = fopen("file.txt", "w");
+        int filename;
+        cout << "Enter file name"; cin >> filename;
+        
+        ofstream myfile;
+        myfile.open ("filename.txt");
+        myfile << "Writing this to a file.\n";
+        myfile << "000" << filename;
+        myfile.close();
         
     }
     
