@@ -48,7 +48,7 @@ ssize_t bytes_read;
 int fd;
 nbytes =sizeof (buf);
 
-status= open(path,O_RDONLY);
+fd= open(path,O_RDONLY);
 
 if (fd == -1){
 cout<<"ERROR IN OPENING FILE ,FILE DOESNOT EXISTS"<<endl;
