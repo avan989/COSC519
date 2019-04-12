@@ -80,7 +80,7 @@ while(true){
 
 
 	cin>>line;
-  	if(strcmp(line.c_str(), "quit!!!") ==true)break;
+  	if(strcmp(line.c_str(), "quit!!!") == 0)break;
 	nbytes = sizeof(line.c_str());
 	write(fd,line.c_str(),nbytes);
         
