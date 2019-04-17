@@ -19,6 +19,7 @@ int doesPathExist(string);
 void read( string);
 void write( string );
 void copy(string,string);
+void set(string,string);
 
 int main(int argc, const char * argv[]) {
     
