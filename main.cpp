@@ -85,19 +85,19 @@ int main(int argc, const char * argv[]) {
         char file[15];
         char c;
         
-        printf("Type name of file to be opened \n");
+	cout << "Type name of file to be opened: \n";
         scanf("%s", file);
         /*  open the file for reading */
         fptr = fopen(file, "r");
         if (fptr == NULL)
         {
-            printf("Error: Cannot open file \n");
+            cout << "Error cannot open file";
             exit(0);
         }
         c = fgetc(fptr);
         while (c != EOF)
         {
-            printf ("%c", c);
+            cout << c << endl;
             c = fgetc(fptr);
         }
         fclose(fptr);
