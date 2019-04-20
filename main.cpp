@@ -10,6 +10,8 @@
 #include <time.h>
 #include <cstdlib>
 #include <stdio.h>
+#include <fstream>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -357,8 +359,3 @@ while((readnum = read(fdi,buf,nbytes)>0)){
 close(fdi);
 close(fdo);
 }
-
-
-
-
-
