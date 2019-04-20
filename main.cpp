@@ -59,7 +59,7 @@ int main(int argc, const char * argv[]) {
 	//Rasheed
 	
         try {
-            rename(argv[2].c_str(), argv[3].c_str());
+            rename(argv[2], argv[3]);
         } catch (int e) {
             cout << "ERROR : " << e << endl;
         }
