@@ -118,7 +118,7 @@ int main(int argc, const char * argv[]) {
         status = remove(file_name);
         
         if (status == 0)
-            cout << "%s file deleted successfully.\n", file_name;
+            cout << file_name <<  " deleted successfully. ";
         else
         {
             cout << "Unable to delete the file\n";
