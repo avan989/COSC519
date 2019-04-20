@@ -57,10 +57,11 @@ int main(int argc, const char * argv[]) {
         
         //set(argv[2],argv[3]);
 	//Rasheed
-	try {
-            std::filesystem::rename("from.txt", "to.txt");
-        } catch (std::filesystem::filesystem_error& e) {
-            std::cout << e.what() << '\n';
+	
+        try {
+            rename(argv[2].c_str(), argv[3].c_str());
+        } catch (int e) {
+            cout << "ERROR : " << e << endl;
         }
         
     }
