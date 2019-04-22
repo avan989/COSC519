@@ -285,77 +285,72 @@ void set(string path, string argv){
 }
 
 //Timiriz
-void read( string path){
+int read(string path){
+FILE *fp;
+char *buffer;
+long numbytes;
 
-char buf[1024];
-size_t nbytes;
-ssize_t bytes_read;
-int fd;
-nbytes =sizeof(buf);
-fd=open(path.c_str(),O_RDONLY);
-if(fd==-1){
-cout<<"ERROR IN OPENING FILE ,FILE DOESNOT EXISTS"<<endl;
-exit(-1);
+fp =fopen(path.c_str(), "r");
+if (fp == NULL){
+printf("nothing to read file not found \n");
+return 1;
 }
-else{
-bytes_read = read(fd, buf , nbytes);
-cout << buf <<endl;
-close(fd);
+fseek(fp,0L, SEEK_END);
+numbytes =ftell(fp);
+fseek(fp, 0L,SEEK_SET);
+buffer =(char*)calloc(numbytes ,sizeof(char));
+ if(buffer == NULL)
+return 1;
+
+fread(buffer,sizeof(char),numbytes,fp);
+fclose(fp);
+printf("number of char: %d\n",numbytes);
+printf("%s\n",buffer);
+free(buffer);
 }
 
-}
- void write(string path){
-int i;
-int fd;
-//char buf[1024];
+void write(string path){
+FILE *fp;
 string line;
-ssize_t bytes_written;
-size_t nbytes;
-nbytes =sizeof (line);
-fd= open(path.c_str(),O_WRONLY | O_CREAT |O_APPEND |O_TRUNC|S_IRUSR|S_IWUSR);
-if(fd == -1){
-cout<<"permission denied...cannot open a file"<<endl;
-}
-else
-{
-
-cout << "Start Writing\n";
-
+fp=fopen(path.c_str(),"a+");
+if(fp){
 while(true){
+cin>>line;
+if (strcmp(line.c_str() , "quit!!!" )== 0)
+	break;
+fputs(line.c_str(),fp);
+fputs("\n",fp);
+}
+}
+ fclose(fp);
+}
+void copy(string paths,string pathd){
+FILE *fs;
+FILE *fd;
+char buf;
+fs =fopen(paths.c_str(),"r");
+if(fs== NULL){
+printf("file not found");
+}
+fd= fopen(pathd.c_str(),"a+");
+while(fread(&buf,1,1,fs)==1){
+fwrite(&buf,1,1,fd);
+}
+fclose(fs);
+fclose(fd);
+
+}
 
 
-	cin>>line;
-  	if(strcmp(line.c_str(), "quit!!!") == 0)break;
-	nbytes = sizeof(line.c_str());
-	write(fd,line.c_str(),nbytes);
-        
+void listdir(){
+DIR *d;
+struct dirent *dir;
+d= opendir(".");
+if(d)
+{
+while ((dir =readdir(d))!= NULL)
+{
+printf("%s\n", dir->d_name);
 }
-
-close(fd);
-}
-
-
-}
- void copy(string paths,string pathd){
-int fdi,fdo,openflags;
-mode_t fileper;
-char buf[1024];
-size_t nbytes;
-ssize_t readnum;
-nbytes= sizeof(buf);
- fdi=open(paths.c_str(),O_RDONLY);
-if(fdi==-1){
-cout<<"error in opening file"<<endl;
-}
-openflags = O_CREAT|O_WRONLY|O_TRUNC;
-fileper = S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH;
-fdo =open (pathd.c_str(),openflags,fileper);
-if(fdo==-1){
-cout<<"error in opening file"<<endl;
-}
-while((readnum = read(fdi,buf,nbytes)>0)){
-   write(fdo,buf,nbytes);
-}
-close(fdi);
-close(fdo);
+closedir(d);
 }
