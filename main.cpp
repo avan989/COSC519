@@ -24,7 +24,7 @@ int read( string);
 void write( string );
 void copy(string,string);
 void set(string,string);
-
+void listdir();
 int main(int argc, const char * argv[]) {
     
     if(argc < 2){
@@ -77,6 +77,10 @@ int main(int argc, const char * argv[]) {
         write(argv[2]);
         
     }
+   else if(strcmp(argv[1], "listdir") == 0){                             //write
+        listdir();
+	   
+	}
     else if(strcmp(argv[1], "copy") == 0){				//copy
         
         copy(argv[2],argv[3]);
