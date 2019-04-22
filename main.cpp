@@ -113,15 +113,14 @@ int main(int argc, const char * argv[]) {
         //deleteFile(argv[2]);
 	//Rasheed
 	int status;
-        char file_name[25];
+        //char file_name[25]
+        //cout << "Enter name of a file you wish to delete\n";
+        //gets(file_name);
         
-        cout << "Enter name of a file you wish to delete\n";
-        gets(file_name);
-        
-        status = remove(file_name);
+        status = remove(argv[2]);
         
         if (status == 0)
-            cout << file_name <<  " deleted successfully. ";
+            cout << argv[2] <<  " deleted successfully. ";
         else
         {
             cout << "Unable to delete the file\n";
