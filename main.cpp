@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <fstream>
 #include <fcntl.h>
+#include<dirent.h>
 
 using namespace std;
 
