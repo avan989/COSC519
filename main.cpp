@@ -20,7 +20,7 @@ void makeDir(string);
 void removeDir(string);
 void getStat(string);
 int doesPathExist(string);
-void read( string);
+int read( string);
 void write( string );
 void copy(string,string);
 void set(string,string);
