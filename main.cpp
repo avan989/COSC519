@@ -20,7 +20,7 @@ void makeDir(string);
 void removeDir(string);
 void getStat(string);
 int doesPathExist(string);
-int read( string);
+void read( string);
 void write( string );
 void copy(string,string);
 void set(string);
@@ -262,28 +262,31 @@ void set(string path){
 }
 
 //Timiriz
-int read(string path){
+void read(string path){
 FILE *fp;
 char *buffer;
 long numbytes;
 
 fp =fopen(path.c_str(), "r");
+    
 if (fp == NULL){
 printf("nothing to read file not found \n");
-return 1;
+exit (-1);
 }
+    
 fseek(fp,0L, SEEK_END);
 numbytes =ftell(fp);
 fseek(fp, 0L,SEEK_SET);
 buffer =(char*)calloc(numbytes ,sizeof(char));
- if(buffer == NULL)
-return 1;
+if(buffer == NULL)
+    exit (-1);
 
 fread(buffer,sizeof(char),numbytes,fp);
 fclose(fp);
 printf("number of char: %d\n",numbytes);
 printf("%s\n",buffer);
 free(buffer);
+    
 }
 
 void write(string path){
