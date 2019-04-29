@@ -254,10 +254,13 @@ void getStat(string path){
 void set(string path){
     
     int i;
-    cout << "Enter mode: " <<endl;
-    cin >> i;
-   
-    chmod(path.c_str(), i);
+    string mode; 
+    cout << "Enter mode: " << endl;
+    cin >> mode;
+
+    i=strtol(mode.c_str(),0,8);
+
+    chmod(path.c_str(),i);
 
 }
 
