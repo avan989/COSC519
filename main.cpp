@@ -144,18 +144,22 @@ int main(int argc, const char * argv[]) {
     } else if(strcmp(argv[1], "help") == 0){                               //help
         
         //deleteDir(argv[2]);
-        cout << "createDir\n";
-        cout << "deleteDir\n";
-        cout << "get\n";
-        cout << "set\n";
-        cout << "move\n";
-        cout << "read\n";
-        cout << "write\n";
-        cout << "close\n";
-        cout << "help\n";
-        cout << "open\n";
-        cout << "deleteFile\n";
-        cout << "createFile\n";
+	cout << "******************************** HELP SCREEN ********************************\n";
+                
+        cout << "createDir             :   Create a new Directory\n";
+        cout << "deleteDir <name>      :   Delete Directory\n";
+        cout << "get <name>            :   Gets attributes\n";
+        cout << "set <name>            :   set permission \n";        
+        cout << "move <name> <new_name>:   move file to another location\n";
+        cout << "read <name>           :   read files and display\n";
+        cout << "write <name>          :   write to a file\n";
+        cout << "listdir               :   list all files and directory\n";
+        cout << "help                  :   help menu\n";
+        cout << "copy <name> <new_name>:   copy file\n";
+        cout << "deleteFile <name>     :   delete file\n";
+        cout << "createFile <name>     :   create file\n";
+
+        cout << "******************************** HELP SCREEN ***************************
 	    
     }else {
 	cout << "incorrect command enter: " << argv[1] << endl;
