@@ -136,9 +136,7 @@ int main(int argc, const char * argv[]) {
         cout << "Enter file name"; cin >> filename;
         ofstream myfile;
 	
-        myfile.open ("filename.txt");
-        myfile << "Writing this to a file.\n";
-        myfile << "000" << filename;
+        myfile.open (filename.c_str());
         myfile.close();
         
     } else if(strcmp(argv[1], "help") == 0){                               //help
