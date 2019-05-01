@@ -159,7 +159,7 @@ int main(int argc, const char * argv[]) {
         cout << "deleteFile <name>     :   delete file\n";
         cout << "createFile <name>     :   create file\n";
 
-        cout << "******************************** HELP SCREEN ***************************
+        cout << "******************************** HELP SCREEN *******************************";
 	    
     }else {
 	cout << "incorrect command enter: " << argv[1] << endl;
