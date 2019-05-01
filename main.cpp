@@ -302,9 +302,10 @@ string line;
 fp=fopen(path.c_str(),"a+");
 if(fp){
 while(true){
-cin>>line;
+
 if (strcmp(line.c_str() , "quit!!!" )== 0)
 	break;
+getline(cin,line);	
 fputs(line.c_str(),fp);
 fputs("\n",fp);
 }
