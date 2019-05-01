@@ -132,8 +132,9 @@ int main(int argc, const char * argv[]) {
         
         //createFile(argv[2]);
 	//Rasheed
-	int filename;
-        cout << "Enter file name"; cin >> filename;
+	string filename;
+        cout << "Enter file name"; 
+	cin >> filename;
         ofstream myfile;
 	
         myfile.open (filename.c_str());
